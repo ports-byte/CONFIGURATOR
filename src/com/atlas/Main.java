@@ -9,7 +9,12 @@ import java.nio.ByteOrder;
 public class Main {
 
     public static void main(String[] s) {
-        SerialPort serialPort = null;
+
+       Menu menu = new Menu();
+       menu.menu();
+       //System.exit(-1);
+
+        /*SerialPort serialPort = null;
         try {
             CommPortIdentifier portIdentifier = CommPortIdentifier.getPortIdentifier("COM3");
             if (portIdentifier.isCurrentlyOwned()) {
@@ -86,6 +91,6 @@ public class Main {
             } catch (IOException | InterruptedException e) {
                 e.printStackTrace();
             }
-        }
+        }*/
     }
 }
