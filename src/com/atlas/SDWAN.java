@@ -1,30 +1,60 @@
 package com.atlas;
 
+import gnu.io.CommPortIdentifier;
+
 import javax.swing.*;
 import javax.swing.plaf.FontUIResource;
 import javax.swing.text.StyleContext;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Locale;
 
-public class SDWAN extends JFrame {
+public class SDWAN extends JFrame implements ActionListener {
     private JPanel panel1;
-    private JButton LIFTOFFButton;
+    private JButton liftOffBtn;
 
     void sdwanStart() {
-        System.out.println("Here we go...!");
-
         this.setLocationRelativeTo(null);
         this.setTitle("1BEER");
+
+        liftOffBtn.addActionListener(this);
+        liftOffBtn.setActionCommand("LIFT OFF");
+
         panel1.setSize(3000, 3000);
         panel1.setVisible(true);
         SwingUtilities.invokeLater(this::createWindow);
-
     }
 
     void createWindow() {
         this.add(panel1);
         this.setVisible(true);
         this.pack();
+    }
+
+    void open() {
+        System.out.println("Here we go...!");
+        try {
+            CommPortIdentifier portIdentifier = CommPortIdentifier.getPortIdentifier("COM3");
+            if (portIdentifier.isCurrentlyOwned()) {
+                System.out.println(portIdentifier.getCurrentOwner());
+                System.out.println("Port is ready to go!");
+            } else {
+                System.out.println("Can't find the port");
+                JOptionPane.showMessageDialog(this, "Check the box is ON and plugged in");
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+            JOptionPane.showMessageDialog(this, "Oh shit something went wrong! Exception: " + e);
+        }
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        String cmd = e.getActionCommand();
+        if (cmd.equals("LIFT OFF")) {
+            open();
+        }
     }
 
     {
@@ -53,14 +83,15 @@ public class SDWAN extends JFrame {
         label1.setForeground(new Color(-1050113));
         label1.setText("Plug in the USB and watch the magic happen.");
         panel1.add(label1, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        LIFTOFFButton = new JButton();
-        LIFTOFFButton.setBackground(new Color(-16777216));
-        Font LIFTOFFButtonFont = this.$$$getFont$$$(null, -1, 48, LIFTOFFButton.getFont());
-        if (LIFTOFFButtonFont != null) LIFTOFFButton.setFont(LIFTOFFButtonFont);
-        LIFTOFFButton.setForeground(new Color(-1050113));
-        LIFTOFFButton.setHideActionText(true);
-        LIFTOFFButton.setText("LIFT OFF");
-        panel1.add(LIFTOFFButton, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        liftOffBtn = new JButton();
+        liftOffBtn.setActionCommand("");
+        liftOffBtn.setBackground(new Color(-16777216));
+        Font liftOffBtnFont = this.$$$getFont$$$(null, -1, 48, liftOffBtn.getFont());
+        if (liftOffBtnFont != null) liftOffBtn.setFont(liftOffBtnFont);
+        liftOffBtn.setForeground(new Color(-1050113));
+        liftOffBtn.setHideActionText(true);
+        liftOffBtn.setText("LIFT OFF");
+        panel1.add(liftOffBtn, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
     }
 
     /**
@@ -91,5 +122,6 @@ public class SDWAN extends JFrame {
     public JComponent $$$getRootComponent$$$() {
         return panel1;
     }
+
 
 }

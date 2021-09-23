@@ -26,6 +26,8 @@ public class Menu extends JFrame implements ActionListener {
         comQueryBtn.setActionCommand("comQuery");
         sdwanBtn.addActionListener(this);
         sdwanBtn.setActionCommand("sdwan");
+        mysteryBtn.addActionListener(this);
+        mysteryBtn.setActionCommand("mystery");
 
         this.setLocationRelativeTo(null);
         this.setTitle("1BEER");
@@ -69,6 +71,9 @@ public class Menu extends JFrame implements ActionListener {
         if (cmd.equals("sdwan")) {
             SDWAN sd = new SDWAN();
             sd.sdwanStart();
+        }
+        if (cmd.equals("mystery")) {
+            JOptionPane.showConfirmDialog(this, "Congrats! You are retarded!");
         }
     }
 
@@ -141,6 +146,13 @@ public class Menu extends JFrame implements ActionListener {
         gbc.gridy = 2;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         panel.add(sdwanBtn, gbc);
+        mysteryBtn = new JButton();
+        mysteryBtn.setText("? Mystery ?");
+        gbc = new GridBagConstraints();
+        gbc.gridx = 2;
+        gbc.gridy = 2;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        panel.add(mysteryBtn, gbc);
     }
 
     /**

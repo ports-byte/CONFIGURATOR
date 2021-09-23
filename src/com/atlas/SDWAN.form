@@ -22,12 +22,12 @@
           <text value="Plug in the USB and watch the magic happen."/>
         </properties>
       </component>
-      <component id="89be" class="javax.swing.JButton" binding="LIFTOFFButton" default-binding="true">
+      <component id="89be" class="javax.swing.JButton" binding="liftOffBtn">
         <constraints>
           <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <actionCommand value="LIFTOFFBtn"/>
+          <actionCommand value=""/>
           <background color="-16777216"/>
           <font size="48"/>
           <foreground color="-1050113"/>
